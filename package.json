@@ -1,0 +1,25 @@
+{
+	"name": "@jdeighan/vllu",
+	"version": "1.0.0",
+	"scripts": {
+		"build:coffee": "coffee -cmb --no-header .",
+		"build": "npm run build:coffee",
+		"test": "npm run build && npx ava --timeout=1m ./test/*.test.js && git status"
+	},
+	"exports": {
+		".": "./src/lib/vllu.js",
+		"./package.json": "./package.json"
+		},
+	"keywords": [],
+	"author": "John Deighan",
+	"license": "MIT",
+	"description": "A undefined app",
+	"type": "module",
+	"dependencies": {
+		"deep-equal": "^2.2.3"
+	},
+	"devDependencies": {
+		"ava": "^6.1.3",
+		"coffeescript": "^2.7.0"
+	}
+}
