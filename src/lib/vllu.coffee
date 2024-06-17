@@ -19,6 +19,13 @@ export croak = (msg) =>
 	return true
 
 # ---------------------------------------------------------------------------
+# deep clone
+
+export dclone = (x) =>
+
+	return structuredClone(x)
+
+# ---------------------------------------------------------------------------
 
 export undef = undefined
 export defined = (x) => (x != undef) && (x != null)

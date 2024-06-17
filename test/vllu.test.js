@@ -11,6 +11,7 @@ import {
   nonEmpty,
   JS,
   escapeStr,
+  dclone,
   indented,
   undented
 } from '@jdeighan/vllu';
@@ -114,6 +115,17 @@ test("line 83", (t) => {
   t.deepEqual(undented(['  abc']), ['abc']);
   t.deepEqual(undented(['abc', 'def']), ['abc', 'def']);
   return t.deepEqual(undented(['\tabc', '\t\tdef']), ['abc', '\tdef']);
+});
+
+test("line 90", (t) => {
+  var clone, ds;
+  ds = {
+    a: 1,
+    b: [1, 2, 3]
+  };
+  clone = dclone(ds);
+  t.not(ds, clone);
+  return t.deepEqual(ds, clone);
 });
 
 //# sourceMappingURL=vllu.test.js.map

@@ -2,7 +2,7 @@
 
 import {
 	undef, defined, notdefined, isString, isArray, isHash,
-	keys, isEmpty, nonEmpty, JS, escapeStr,
+	keys, isEmpty, nonEmpty, JS, escapeStr, dclone,
 	indented, undented,
 	} from '@jdeighan/vllu'
 import test from 'ava'
@@ -86,3 +86,9 @@ test "line 83", (t) =>
 	t.deepEqual undented(['  abc']), ['abc']
 	t.deepEqual undented(['abc','def']), ['abc','def']
 	t.deepEqual undented(['\tabc','\t\tdef']), ['abc','\tdef']
+
+test "line 90", (t) =>
+	ds = {a:1, b: [1,2,3]}
+	clone = dclone(ds)
+	t.not ds, clone
+	t.deepEqual ds, clone

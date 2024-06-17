@@ -16,6 +16,12 @@ export var croak = (msg) => {
 };
 
 // ---------------------------------------------------------------------------
+// deep clone
+export var dclone = (x) => {
+  return structuredClone(x);
+};
+
+// ---------------------------------------------------------------------------
 export var undef = void 0;
 
 export var defined = (x) => {
