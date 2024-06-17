@@ -138,4 +138,64 @@ export var escapeBlock = (block) => {
   return escapeStr(block, 'escNoNL');
 };
 
+// ---------------------------------------------------------------------------
+//   indented
+//      - Indent each line in a block or array
+export var indented = (input, level = 1, oneIndent = "\t") => {
+  var lLines, lNewLines, line;
+  lLines = isArray(input) ? input : input.split("\n");
+  lNewLines = (function() {
+    var j, len1, results;
+    results = [];
+    for (j = 0, len1 = lLines.length; j < len1; j++) {
+      line = lLines[j];
+      results.push(oneIndent.repeat(level) + line);
+    }
+    return results;
+  })();
+  if (isArray(input)) {
+    return lNewLines;
+  } else {
+    return lNewLines.join("\n");
+  }
+};
+
+// ---------------------------------------------------------------------------
+//   undented
+//      - get indentation from first line,
+//        remove it from all lines
+export var undented = (input) => {
+  var firstLine, indentation, lLines, lMatches, lNewLines, len, line, pos;
+  lLines = isArray(input) ? input : input.split("\n");
+  if (lLines.length === 0) {
+    return input;
+  }
+  firstLine = lLines[0];
+  if (lMatches = firstLine.match(/^\s+/)) {
+    indentation = lMatches[0];
+  } else {
+    return input;
+  }
+  len = indentation.length;
+  lNewLines = (function() {
+    var j, len1, results;
+    results = [];
+    for (j = 0, len1 = lLines.length; j < len1; j++) {
+      line = lLines[j];
+      pos = line.indexOf(indentation);
+      if (pos === 0) {
+        results.push(line.substring(len));
+      } else {
+        results.push(line);
+      }
+    }
+    return results;
+  })();
+  if (isArray(input)) {
+    return lNewLines;
+  } else {
+    return lNewLines.join("\n");
+  }
+};
+
 //# sourceMappingURL=vllu.js.map

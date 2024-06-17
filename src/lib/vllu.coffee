@@ -114,3 +114,56 @@ export escapeStr = (str, hReplace=hEsc, hOptions={}) =>
 export escapeBlock = (block) =>
 
 	return escapeStr(block, 'escNoNL')
+
+# ---------------------------------------------------------------------------
+#   indented
+#      - Indent each line in a block or array
+
+export indented = (input, level=1, oneIndent="\t") =>
+
+	lLines = if isArray(input)
+		input
+	else
+		input.split("\n")
+
+	lNewLines = for line in lLines
+		oneIndent.repeat(level) + line
+
+	if isArray(input)
+		return lNewLines
+	else
+		return lNewLines.join("\n")
+
+# ---------------------------------------------------------------------------
+#   undented
+#      - get indentation from first line,
+#        remove it from all lines
+
+export undented = (input) =>
+
+	lLines = if isArray(input)
+		input
+	else
+		input.split("\n")
+
+	if (lLines.length == 0)
+		return input
+
+	firstLine = lLines[0]
+	if lMatches = firstLine.match(/^\s+/)
+		indentation = lMatches[0]
+	else
+		return input
+
+	len = indentation.length
+	lNewLines = for line in lLines
+		pos = line.indexOf(indentation)
+		if (pos == 0)
+			line.substring(len)
+		else
+			line
+
+	if isArray(input)
+		return lNewLines
+	else
+		return lNewLines.join("\n")
