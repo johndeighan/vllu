@@ -40,8 +40,14 @@ export var isArray = Array.isArray;
 
 export var keys = Object.keys;
 
-export var JS = (x) => {
-  return JSON.stringify(x);
+// ---------------------------------------------------------------------------
+export var range = function*(n) {
+  var i;
+  i = 0;
+  while (i < n) {
+    yield i;
+    i += 1;
+  }
 };
 
 // ---------------------------------------------------------------------------

@@ -9,9 +9,9 @@ import {
   keys,
   isEmpty,
   nonEmpty,
-  JS,
   escapeStr,
   dclone,
+  range,
   indented,
   undented
 } from '@jdeighan/vllu';
@@ -38,25 +38,29 @@ test("line 12", (t) => {
 });
 
 test("line 26", (t) => {
-  return t.truthy(isEmpty(undef));
+  return t.deepEqual(Array.from(range(5)), [0, 1, 2, 3, 4]);
 });
 
 test("line 29", (t) => {
-  return t.truthy(isEmpty(null));
+  return t.truthy(isEmpty(undef));
 });
 
 test("line 32", (t) => {
+  return t.truthy(isEmpty(null));
+});
+
+test("line 35", (t) => {
   t.truthy(isEmpty(''));
   t.truthy(isEmpty([]));
   return t.truthy(isEmpty({}));
 });
 
-test("line 37", (t) => {
+test("line 40", (t) => {
   t.truthy(isEmpty(undef));
   return t.truthy(isEmpty(null));
 });
 
-test("line 41", (t) => {
+test("line 44", (t) => {
   t.falsy(isEmpty('abc'));
   t.falsy(isEmpty([1, 2]));
   return t.falsy(isEmpty({
@@ -64,7 +68,7 @@ test("line 41", (t) => {
   }));
 });
 
-test("line 46", (t) => {
+test("line 49", (t) => {
   t.falsy(nonEmpty(undef));
   t.falsy(nonEmpty(null));
   t.falsy(nonEmpty(''));
@@ -72,7 +76,7 @@ test("line 46", (t) => {
   return t.falsy(nonEmpty({}));
 });
 
-test("line 53", (t) => {
+test("line 56", (t) => {
   t.falsy(nonEmpty(undef));
   t.truthy(nonEmpty('abc'));
   t.truthy(nonEmpty([1, 2]));
@@ -81,11 +85,11 @@ test("line 53", (t) => {
   }));
 });
 
-test("line 59", (t) => {
+test("line 62", (t) => {
   return t.is(escapeStr("a\n\tb"), "a▼→b");
 });
 
-test("line 62", (t) => {
+test("line 65", (t) => {
   t.is(indented('abc'), '\tabc');
   t.is(indented('abc', 2), '\t\tabc');
   t.is(indented('abc', 1, '--'), '--abc');
@@ -93,7 +97,7 @@ test("line 62", (t) => {
   return t.is(indented('abc\ndef'), '\tabc\n\tdef');
 });
 
-test("line 69", (t) => {
+test("line 72", (t) => {
   t.deepEqual(indented(['abc']), ['\tabc']);
   t.deepEqual(indented(['abc'], 2), ['\t\tabc']);
   t.deepEqual(indented(['abc'], 1, '--'), ['--abc']);
@@ -101,7 +105,7 @@ test("line 69", (t) => {
   return t.deepEqual(indented(['abc', 'def']), ['\tabc', '\tdef']);
 });
 
-test("line 76", (t) => {
+test("line 79", (t) => {
   t.is(undented('\tabc'), 'abc');
   t.is(undented('\t\tabc', 2), 'abc');
   t.is(undented('  abc'), 'abc');
@@ -109,7 +113,7 @@ test("line 76", (t) => {
   return t.is(undented('\tabc\n\t\tdef'), 'abc\n\tdef');
 });
 
-test("line 83", (t) => {
+test("line 86", (t) => {
   t.deepEqual(undented(['\tabc']), ['abc']);
   t.deepEqual(undented(['\t\tabc']), ['abc']);
   t.deepEqual(undented(['  abc']), ['abc']);
@@ -117,7 +121,7 @@ test("line 83", (t) => {
   return t.deepEqual(undented(['\tabc', '\t\tdef']), ['abc', '\tdef']);
 });
 
-test("line 90", (t) => {
+test("line 93", (t) => {
   var clone, ds;
   ds = {
     a: 1,

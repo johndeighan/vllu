@@ -33,7 +33,16 @@ export notdefined = (x) => (x == undef) || (x == null)
 export isString = (x) => (typeof x == 'string') || (x instanceof String)
 export isArray = Array.isArray
 export keys = Object.keys
-export JS = (x) => JSON.stringify(x)
+
+# ---------------------------------------------------------------------------
+
+export range = (n) ->
+
+	i = 0
+	while (i < n)
+		yield i
+		i += 1
+	return
 
 # ---------------------------------------------------------------------------
 
