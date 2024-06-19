@@ -1,6 +1,6 @@
 {
 	"name": "@jdeighan/vllu",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"scripts": {
 		"build:coffee": "coffee -cmb --no-header .",
 		"build": "npm run build:coffee",
